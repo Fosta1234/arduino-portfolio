@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Automatic Night Light Project - Starford Omondi</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <h1>Automatic Night Light using LED</h1>
+        <p>Arduino Uno Project</p>
+    </header>
+
+    <div id="main">
+        <section>
+            <h2>Project Overview</h2>
+            <img src="images/nightlight.jpeg" alt="Night Light Circuit" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+            <p>
+                The system automatically turns ON an LED in darkness And
+                OFF in bright light using an LDR voltage divider.
+            </p>
+
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>LED</li>
+                <li>220Ω Resistor</li>
+                <li>LDR</li>
+                <li>10kΩ Resistor</li>
+                <li>Breadboard</li>
+                <li>Jumper Wires</li>
+            </ul>
+
+            <h2>How It Works</h2>
+            <p>
+                The LDR changes resistance based on light:
+                <ul>
+                    <li>Bright light - Low resistance</li>
+                    <li>Darkness - High Resistance</li>
+                </ul>
+                We use a voltage divider(10kΩ resistor) to convert that into an analog voltage.
+                Arduino will:
+                <ul>
+                    <li>Read light level</li>
+                    <li>If dark - turn LED ON</li>
+                    <li>if bright - turn LED OFF</li>
+                </ul>
+            
+            </p>
+
+            <h2>Arduino Code</h2>
+            <pre><code>
+#define LDR_PIN A0
+#define LED_PIN 9
+#define THRESHOLD 400
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.println("Automatic Night Light System Started");
+}
+
+void loop() {
+  int lightValue = analogRead(LDR_PIN);
+
+  Serial.print("Light Level: ");
+  Serial.println(lightValue);
+
+  if (lightValue < THRESHOLD) {
+    digitalWrite(LED_PIN, HIGH);
+    Serial.println("Dark detected - LED ON");
+  } else {
+    digitalWrite(LED_PIN, LOW);
+    Serial.println("Light detected - LED OFF");
+  }
+
+  delay(500);
+}
+            </code></pre>
+            <a href="https://github.com/Fosta1234/arduino-automatic-night-light"
+             class="button">View Code on GitHub</a>
+
+            <a href="index.html">⬅ Back to Home</a>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

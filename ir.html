@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>IR Obstacle Avoidance Alarm - Starford Omondi</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <h1>IR Obstacle Avoidance Alarm</h1>
+        <p>Arduino Uno Beginner Project</p>
+    </header>
+
+    <div id="main">
+        <section>
+            <h2>Project Overview</h2>
+            <img src="images/ir.jpeg" alt="IR Obstacle Avoidance Circuit" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+            <p>
+                The IR Obstacle Avoidance Alarm is a simple project designed to demonstrate how to use an infrared sensor with an Arduino Uno. The project detects obstacles using the IR sensor and triggers an alarm (in this case, an LED) when an obstacle is detected within a certain range.
+            </p>
+
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>IR Obstacle Sensor</li>
+                <li>LED</li>
+                <li>220Ω Resistor</li>
+                <li>Breadboard</li>
+                <li>Jumper Wires</li>
+            </ul>
+
+            <h2>How It Works</h2>
+            <p>
+               The IR obstacle module has an IR LED(Transmitter) that emits infrared light and a photodiode(Receiver) that detects the reflected light. 
+               When an obstacle is detected, the photodiode sends a signal to the Arduino, which then turns on the LED connected to pin 13.
+
+            </p>
+
+            <h2>Arduino Code</h2>
+            <pre><code>
+int irPin = 2;
+int ledPin = 13;
+int buzzerPin = 8;
+
+void setup() {
+  pinMode(irPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+  int irState = digitalRead(irPin);
+
+  if (irState == LOW) {
+  digitalWrite(ledPin, HIGH);
+  digitalWrite(buzzerPin, HIGH);
+  delay(200);
+  digitalWrite(buzzerPin, LOW);
+  delay(200);
+} 
+else {
+  digitalWrite(ledPin, LOW);
+  digitalWrite(buzzerPin, LOW);
+}
+}
+            </code></pre>
+
+            <a href="https://github.com/Fosta1234/arduino-obstacle-avoidance-alarm" class="button">View Code on GitHub</a>
+            <a href="index.html">⬅ Back to Home</a>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

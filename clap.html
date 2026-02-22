@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Clap Switch Project - Starford Omondi</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <h1>Clap Switch</h1>
+        <p>Arduino Uno Beginner Project</p>
+    </header>
+
+    <div id="main">
+        <section>
+            <h2>Project Overview</h2>
+            <img src="images/clap.jpeg" alt="Clap Switch Circuit" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+            <p>
+                The Arduino Clap Switch is a sound-activated control system.
+                 Instead of using manual switches, it uses a sound sensor to "listen" for sudden spikes in ambient noise (like a clap). When a clap is detected, the Arduino toggles the state of an LED(either HIGH OR LOW). This project is a foundational step toward Voice Automation and Smart Home systems.
+
+            </p>
+
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>Sound sensor module</li>
+                <li>LED</li>
+                <li>220Ω Resistor</li>
+                <li>Breadboard</li>
+                <li>Jumper Wires</li>
+            </ul>
+
+            <h2>How It Works</h2>
+            <p>
+                The sound sensor module has:
+                <ul>
+                    <li>A microphone</li>
+                    <li>An amplifier</li>
+                    <li>A comparator</li>
+                </ul>
+                When you clap sound waves hit the microphone. Sound is then coverted to electrical signals.
+                An amplifier increase the signal. The comparator checks if the sound is above the set threshold.
+                If above threshold - Digital Output(DO) becomes HIGH.
+            </p>
+
+            <h2>Arduino Code</h2>
+            <pre><code>
+int soundPin = 2;
+int ledPin = 8;
+
+int ledState = LOW;
+int lastSoundState = LOW;
+
+void setup() {
+  pinMode(soundPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  int currentSoundState = digitalRead(soundPin);
+
+  // Detect rising edge (clap detected)
+  if (currentSoundState == HIGH && lastSoundState == LOW) {
+    ledState = !ledState;  // Toggle LED
+    digitalWrite(ledPin, ledState);
+    delay(300);  // Debounce delay
+  }
+
+  lastSoundState = currentSoundState;
+}
+            </code></pre>
+            
+            <a href="https://github.com/Fosta1234/arduino-clap-switch" class="button">View Code on GitHub</a>
+            <a href="index.html">⬅ Back to Home</a>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

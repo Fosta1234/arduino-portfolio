@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Water Level Detector Project - Starford Omondi</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <h1>Water Level Detector</h1>
+        <p>Arduino Uno Project</p>
+    </header>
+
+    <div id="main">
+        <section>
+            <h2>Project Overview</h2>
+            <img src="images/water.jpeg" alt="Water Level Detector Circuit" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+            <p>
+               The system reads analog conductivity values
+               from a water level sensor and classifies the water 
+               level into three states: Low, Medium and Full.
+            </p>
+
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>3 LEDs</li>
+                <li>3*220Ω Resistor</li>
+                <li>Breadboard</li>
+                <li>Jumper Wires</li>
+            </ul>
+
+            <h2>How It Works</h2>
+            <p>
+                The exposed traces act like many tiny switches.
+                <ul>
+                    <li>When water touches more lines - conductivity increases.</li>
+                    <li>The Sensor outputs a higher analog value.</li>
+                    <li>Arduino reads that value and decides the level.</li>
+                </ul>
+                It does not measure depth directly - it measures conductivity across the board.
+            </p>
+
+            <h2>Arduino Code</h2>
+            <pre><code>
+int sensorPin = A0;
+
+int redLED = 8;
+int yellowLED = 9;
+int greenLED = 10;
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(redLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+}
+
+void loop() {
+  int waterValue = analogRead(sensorPin);
+  Serial.println(waterValue);
+
+  if (waterValue < 200) {
+    // LOW
+    digitalWrite(redLED, HIGH);
+    digitalWrite(yellowLED, LOW);
+    digitalWrite(greenLED, LOW);
+  }
+  else if (waterValue < 550) {
+    // MEDIUM
+    digitalWrite(redLED, LOW);
+    digitalWrite(yellowLED, HIGH);
+    digitalWrite(greenLED, LOW);
+  }
+  else {
+    // FULL
+    digitalWrite(redLED, LOW);
+    digitalWrite(yellowLED, LOW);
+    digitalWrite(greenLED, HIGH);
+  }
+
+  delay(300);
+}
+            </code></pre>
+
+            <a href="https://github.com/Fosta1234/arduino-water-level-detector" class="button">View Code on GitHub</a>
+            <a href="index.html">⬅ Back to Home</a>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

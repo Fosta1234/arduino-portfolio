@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Temperature & Humidity Monitor System - Starford Omondi</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <h1>Temperature & Humidity Monitor</h1>
+        <p>Arduino Uno Project</p>
+    </header>
+
+    <div id="main">
+        <section>
+            <h2>Project Overview</h2>
+            <img src="images/temp.jpeg" alt="Temperature Monitor" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+            <p>
+               To monitor environmental conditions and trigger alert if temperature exceeds safe threshold.
+            </p>
+
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>DHT11</li>
+                <li>220Ω Resistor</li>
+                <li>Breadboard</li>
+                <li>Jumper Wires</li>
+                <li>LED</li>
+            </ul>
+
+            <h2>How It Works</h2>
+            <p>
+                The DHT11 sends digital temperature & humidity data to the Arduino.
+                The microcontrroller processes the data and activates an LED alert if the temperature crosses 30°C
+            </p>
+
+            <h2>Arduino Code</h2>
+            <pre><code>
+#include <DHT.h>
+
+#define DHTPIN 2
+#define DHTTYPE DHT11
+#define ALERT_LED 8
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  pinMode(ALERT_LED, OUTPUT);
+  Serial.println("Environmental Monitoring System Started");
+}
+
+void loop() {
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
+
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("Sensor read error!");
+    return;
+  }
+
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.print(" °C | Humidity: ");
+  Serial.print(humidity);
+  Serial.println(" %");
+
+  // Temperature alert threshold
+  if (temperature > 30) {
+    digitalWrite(ALERT_LED, HIGH);
+    Serial.println("WARNING: High Temperature!");
+  } else {
+    digitalWrite(ALERT_LED, LOW);
+  }
+
+  delay(2000);
+}
+            </code></pre>
+            <a
+            href="https://Github.com/Fosta1234/arduino-temperature-humidity-monitor"
+            class="button">View Code on GitHub</a>
+
+            <a href="index.html">⬅ Back to Home</a>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

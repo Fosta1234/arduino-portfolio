@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>LED Blink Project - Starford Omondi</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <h1>LED Blink System</h1>
+        <p>Arduino Uno Beginner Project</p>
+    </header>
+
+    <div id="main">
+        <section>
+            <h2>Project Overview</h2>
+            <img src="images/led.jpeg" alt="LED Blink Circuit" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+            <p>
+                This project demonstrates how to control an LED using the 
+                Arduino Uno. The LED is connected to digital pin 13 
+                through a 220Ω resistor.
+            </p>
+
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>LED</li>
+                <li>220Ω Resistor</li>
+                <li>Breadboard</li>
+                <li>Jumper Wires</li>
+            </ul>
+
+            <h2>How It Works</h2>
+            <p>
+                The Arduino sends a HIGH signal (5V) to turn the LED ON 
+                and a LOW signal (0V) to turn it OFF repeatedly using delays.
+            </p>
+
+            <h2>Arduino Code</h2>
+            <pre><code>
+void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+}
+            </code></pre>
+
+            <a href="index.html">⬅ Back to Home</a>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>
